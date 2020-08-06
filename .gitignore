@@ -1,0 +1,5 @@
+.*
+!/.gitignore
+preprocessing.ipynb
+helpers.py
+documents
