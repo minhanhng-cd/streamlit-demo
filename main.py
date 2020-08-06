@@ -1,6 +1,9 @@
 import os
+import matplotlib.pyplot as plt
 import streamlit as st
 from helpers import *
+
+plt.style.use('seaborn')
 
 st.title('Cao Vit Gibbon - Audio Recognition')
 
@@ -35,7 +38,14 @@ with st.echo():
 st.subheader('Waveform')
 
 with st.echo():
+    plt.figure()
+
     librosa.display.waveplot(signal, sr=sr)
+
+    plt.title('Waveform')
+
+    plt.xlabel('Time')
+    plt.ylabel('Amplitude')
 
 st.pyplot()
 
@@ -55,7 +65,14 @@ with st.echo():
     left_magnitude = magnitude[:len(frequency)//2]
 
     # Plot frequency and magnitude
+    plt.figure()
+
+    plt.title('Spectrum')
+
     plt.plot(left_frequency, left_magnitude)
+
+    plt.xlabel('Frequency')
+    plt.ylabel('Magnitude')
 
 st.pyplot()
 
@@ -71,8 +88,17 @@ with st.echo():
     # Convert magnitude to db for better visualization
     log_spectrogram = librosa.amplitude_to_db(spectrogram)
 
-    librosa.display.specshow(
-        log_spectrogram, sr=sr, hop_length=hop_length)
+    # Display Spectrogram
+    plt.figure()
+
+    plt.title('Spectogram')
+
+    librosa.display.specshow(log_spectrogram, sr=sr, hop_length=hop_length)
+
+    plt.xlabel('Time')
+    plt.ylabel('Frequency')
+
+    plt.colorbar()
 
 st.pyplot()
 
@@ -81,11 +107,19 @@ st.subheader('Mel-frequency cepstral coefficients (MFCCs)')
 
 with st.echo():
 
-    mfcc_feature = librosa.feature.mfcc(
+    MFCCs = librosa.feature.mfcc(
         signal, n_fft=n_fft, hop_length=hop_length, n_mfcc=13)
 
     # Display MFCCs
-    librosa.display.specshow(
-        mfcc_feature, sr=sr, hop_length=hop_length)
+    plt.figure()
+
+    plt.title('Mel-frequency cepstral coefficients (MFCCs)')
+
+    librosa.display.specshow(MFCCs, sr=sr, hop_length=hop_length)
+
+    plt.xlabel('Time')
+    plt.ylabel('MFCCs')
+
+    plt.colorbar()
 
 st.pyplot()
