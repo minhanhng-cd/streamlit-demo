@@ -3,5 +3,5 @@
 preprocessing.ipynb
 helpers.py
 documents
-*.WAV
-!sample*.WAV
+data/*.WAV
+!data/sample*.WAV
