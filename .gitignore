@@ -1,7 +1,8 @@
 .*
+__*
 !/.gitignore
 preprocessing.ipynb
 helpers.py
 documents
-data/*.WAV
-!data/sample*.WAV
+data
+# !data/sample*.WAV
